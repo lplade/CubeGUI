@@ -17,7 +17,13 @@ public class SolutionTableModel extends AbstractTableModel{
     };
 
     SolutionTableModel(Vector<StoredSolution> solutions) {
-        this.allSolutions = solutions;
+        allSolutions = solutions;
+    }
+
+    void updateData(Vector<StoredSolution> updatedSolutions) {
+        //send a new set of data to the table
+        allSolutions = updatedSolutions;
+        fireTableDataChanged();
     }
 
     @Override
@@ -55,4 +61,6 @@ public class SolutionTableModel extends AbstractTableModel{
     public String getColumnName(int col){
         return columnNames[col];
     }
+
+
 }

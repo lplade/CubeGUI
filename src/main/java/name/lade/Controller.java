@@ -4,8 +4,9 @@ import java.util.Vector;
 
 public class Controller {
 
-    static GUI gui;
-    static DB db;
+    private static GUI gui;
+    private static DB db;
+    Vector<StoredSolution> allSolutions;
 
     public static void main(String[] args) {
         Controller controller = new Controller();
@@ -15,7 +16,7 @@ public class Controller {
     private void startApp() {
         db = new DB();
         db.createTable();
-        Vector<StoredSolution> allSolutions = db.fetchAllRecords();
+        allSolutions = db.fetchAllRecords();
         gui = new GUI(this);
         gui.setListData(allSolutions);
     }

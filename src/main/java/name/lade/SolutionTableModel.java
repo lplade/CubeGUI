@@ -21,7 +21,7 @@ public class SolutionTableModel extends AbstractTableModel{
     }
 
     void updateData(Vector<StoredSolution> updatedSolutions) {
-        //send a new set of data to the table
+        //completely replace data in table with new data
         allSolutions = updatedSolutions;
         fireTableDataChanged();
     }
@@ -44,7 +44,6 @@ public class SolutionTableModel extends AbstractTableModel{
             case 1: // Solver
                 return allSolutions.get(rowIndex).name;
             case 2: // Time
-                //TODO round to decimal places?
                 return allSolutions.get(rowIndex).time;
             case 3: // Comment
                 return allSolutions.get(rowIndex).notes;

@@ -88,8 +88,28 @@ public class DB {
         }
     }
 
-    void updateRecord(StoredSolution solution) {
-        //TODO implement record update
+    void updateRecord(int currentID, Solution newSolution) {
+        try (Connection conn = DriverManager.getConnection(DB_CONNECTION_URL, USER, PASSWORD)) {
+
+            //Don't anticipate updating anything but time, but we update all three fields anyway
+            String updateTime = "UPDATE Solutions SET Solver = ?, SolvedTime = ?, Notes = ? WHERE SolutionID = ?";
+            PreparedStatement updatePS = conn.prepareStatement(updateTime);
+
+            updatePS.setString(1, newSolution.name);
+            updatePS.setDouble(2, newSolution.time);
+            updatePS.setString(3, newSolution.notes);
+            updatePS.setInt(4, currentID);
+
+            updatePS.executeUpdate();
+
+            System.out.println("Updated record " + currentID + " to " + newSolution);
+
+            updatePS.close();
+            conn.close();
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        }
     }
 
     void delete(StoredSolution solution) {

@@ -29,8 +29,9 @@ public class Controller {
         db.addRecord(solution);
     }
 
-    void updateRecord(StoredSolution solution) {
-        db.updateRecord(solution);
+    void updateRecord(int currentID, Solution newSol) {
+        //currentID is the primary key of the DB
+        db.updateRecord(currentID, newSol);
     }
 
     void deleteRecord(StoredSolution solution) {
